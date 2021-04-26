@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import * as Yup from 'yup';
 import { CurrentAddressContext } from '../../context/CurrentAddressContext';
 import { Formik, Form } from 'formik';
@@ -12,22 +12,23 @@ const AddressFormCheck = () => {
 
     const FORM_VALIDATION = Yup.object().shape({
         postal_code: Yup.number()
-            .required('Required'),
+            .required('*обязательно для заполнения'),
         country: Yup.string()
-            .required('Required'),
+            .required('*обязательно для заполнения'),
         administrative_area: Yup.string()
-            .required('Required'),
+            .required('*обязательно для заполнения'),
         locality: Yup.string()
-            .required('Required'),
+            .required('*обязательно для заполнения'),
         route: Yup.string()
-            .required('Required'),
+            .required('*обязательно для заполнения'),
         street_number: Yup.string()
-            .required('Required'),
+            .required('*обязательно для заполнения'),
     });
+    console.log(currentAddress)
 
     return (
         <Formik
-            initialValues={{ currentAddress }}
+            initialValues={ currentAddress }
             validationSchema={FORM_VALIDATION}
             onSubmit={values => {
                 console.log(values);
@@ -40,7 +41,6 @@ const AddressFormCheck = () => {
                         <TextField
                             name="country"
                             label="Страна"
-                            defaultValue={currentAddress.country}
                         />
                     </Grid>
 
@@ -48,7 +48,6 @@ const AddressFormCheck = () => {
                         <TextField
                             name="administrative_area"
                             label="Область, район"
-                            defaultValue={currentAddress.administrative_area}
                         />
                     </Grid>
 
@@ -56,7 +55,6 @@ const AddressFormCheck = () => {
                         <TextField
                             name="locality"
                             label="Город"
-                            defaultValue={currentAddress.locality}
                         />
                     </Grid>
 
@@ -64,7 +62,6 @@ const AddressFormCheck = () => {
                         <TextField
                             name="route"
                             label="Улица"
-                            defaultValue={currentAddress.route}
                         />
                     </Grid>
 
@@ -72,7 +69,6 @@ const AddressFormCheck = () => {
                         <TextField
                             name="street_number"
                             label="№ дома"
-                            defaultValue={currentAddress.street_number}
                         />
                     </Grid>
 
@@ -80,7 +76,6 @@ const AddressFormCheck = () => {
                         <TextField
                             name="postal_code"
                             label="Индекс"
-                            defaultValue={currentAddress.postal_code}
                         />
                     </Grid>
 
