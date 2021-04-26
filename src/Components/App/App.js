@@ -1,6 +1,7 @@
 import React from 'react';
 import { CurrentAddressContext } from '../../context/CurrentAddressContext';
-import StepOne from '../StepComponent/StepOne';
+import { Container } from '@material-ui/core';
+import StepComponent from '../StepComponent/StepComponent';
 
 function App() {
 
@@ -11,7 +12,6 @@ function App() {
     locality: '',
     route: '',
     street_number: '',
-    formatted_address: ''
   });
   const [placeSave, setPlaceSave] = React.useState(false);
 
@@ -50,16 +50,24 @@ function App() {
       };
     });
     return SetCurrentAddress({
-      ...currentAddress,
-      formatted_address: place.formatted_address
+      ...currentAddress
     });
   };
 
+  function onSubmit(values) {
+    SetCurrentAddress(values);
+  }
 
   return (
     <CurrentAddressContext.Provider value={currentAddress}>
-
-      <StepOne savedAddress={savedAddress} placeSave={placeSave} />
+      
+      <Container maxWidth="sm">
+        <StepComponent
+          savedAddress={savedAddress}
+          placeSave={placeSave}
+          onSubmit={onSubmit}
+        />
+      </Container>
 
     </CurrentAddressContext.Provider>
   );

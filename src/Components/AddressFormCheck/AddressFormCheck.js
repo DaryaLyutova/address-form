@@ -6,7 +6,7 @@ import { Formik, Form } from 'formik';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
-const AddressFormCheck = () => {
+const AddressFormCheck = (props) => {
 
     const currentAddress = React.useContext(CurrentAddressContext);
 
@@ -24,13 +24,17 @@ const AddressFormCheck = () => {
         street_number: Yup.string()
             .required('*обязательно для заполнения'),
     });
-    console.log(currentAddress)
+
+    const handlerSubmite = (values) => {
+        props.onSubmit(values);
+    }
 
     return (
         <Formik
-            initialValues={ currentAddress }
+            initialValues={currentAddress}
             validationSchema={FORM_VALIDATION}
             onSubmit={values => {
+                handlerSubmite(values);
                 console.log(values);
             }}>
             <Form>

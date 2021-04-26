@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, NoSsr } from '@material-ui/core';
+import { NoSsr } from '@material-ui/core';
 import GoogleAddressForm from '../GoogleAddressForm/GoogleAddressForm';
 import { makeStyles } from '@material-ui/core/styles';
 import AddressFormCheck from '../AddressFormCheck/AddressFormCheck';
@@ -23,7 +23,6 @@ const StepOne = (props) => {
   };
 
   return (
-    <Container maxWidth="sm">
       <div className={classes.formWrapper}>
         <GoogleAddressForm savedAddress={props.savedAddress} />
         {props.placeSave ? (
@@ -36,12 +35,11 @@ const StepOne = (props) => {
         {placeChange ? (
           <React.Fragment>
             <NoSsr defer={placeChange}>
-              <AddressFormCheck />
+              <AddressFormCheck onSubmit={props.onSubmit}/>
             </NoSsr>
           </React.Fragment>
         ) : null}
       </div>
-    </Container>
   );
 }
 
