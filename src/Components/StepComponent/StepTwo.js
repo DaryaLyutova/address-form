@@ -9,19 +9,28 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(5),
         marginBottom: theme.spacing(8),
     },
+    gridContainer: {
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    text: {
+        textAlign: "center"
+    }
 }));
 
-const StepTwo = (props) => {
+const StepTwo = () => {
+
     const currentAddress = React.useContext(CurrentAddressContext);
     const YourChooseAddress = Object.values(currentAddress).filter(element => !!(element) === true).join(', ');
+
     const classes = useStyles();
 
     return (
         <Container maxWidth="sm">
             <div className={classes.formWrapper}>
-                <Grid container spacing={9} style={{ alignItems: "center", justifyContent: "center" }}>
+                <Grid container spacing={9} className={classes.gridContainer}>
                     <Grid item xs={12}>
-                        <Typography style={{ textAlign: "center" }}>Вы выбрали: 
+                        <Typography className={classes.text}>Вы выбрали:
                             {YourChooseAddress}
                         </Typography>
                     </Grid>

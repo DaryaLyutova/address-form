@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Stepper, Step, StepLabel, Button, Typography, Box } from '@material-ui/core';
+import { CurrentAddressContext } from '../../context/CurrentAddressContext';
 import StepTwo from './StepTwo';
 import StepOne from './StepOne';
 
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     instructions: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
+        textAlign: "center",
     },
 }));
 
@@ -33,16 +35,30 @@ function getStepContent(stepIndex) {
 }
 
 export default function HorizontalLabelPositionBelowStepper(props) {
+
     const classes = useStyles();
+
+    const currentAddress = React.useContext(CurrentAddressContext);
+    const YourChooseAddress = Object.values(currentAddress);
+    const [placeChange, setPlaceChange] = React.useState(false);
     const [activeStep, setActiveStep] = React.useState(0);
+    
     const steps = getSteps();
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 2);
+        if (YourChooseAddress.every(value => value)) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 2);
+        } else {
+            handlerToggleForm();
+        }
     };
 
     const handleReset = () => {
         setActiveStep(0);
+    };
+
+    const handlerToggleForm = () => {
+        setPlaceChange(!placeChange);
     };
 
     return (
@@ -72,13 +88,14 @@ export default function HorizontalLabelPositionBelowStepper(props) {
                         <StepOne
                             savedAddress={props.savedAddress}
                             placeSave={props.placeSave}
+                            onToggle={handlerToggleForm}
+                            placeChange={placeChange}
                             onSubmit={props.onSubmit} />
                         <div>
                             <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={handleNext}
-                            // disabled={activeStep === 0}
                             >Next
                             </Button>
                         </div>

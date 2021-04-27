@@ -60,7 +60,7 @@ function App() {
 
   return (
     <CurrentAddressContext.Provider value={currentAddress}>
-      
+
       <Container maxWidth="sm">
         <StepComponent
           savedAddress={savedAddress}

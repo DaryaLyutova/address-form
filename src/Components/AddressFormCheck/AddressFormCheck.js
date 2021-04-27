@@ -1,8 +1,8 @@
 import React from 'react';
+import { Formik, Form } from 'formik';
 import { Grid } from '@material-ui/core';
 import * as Yup from 'yup';
 import { CurrentAddressContext } from '../../context/CurrentAddressContext';
-import { Formik, Form } from 'formik';
 import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
@@ -27,6 +27,7 @@ const AddressFormCheck = (props) => {
 
     const handlerSubmite = (values) => {
         props.onSubmit(values);
+        props.closeForm();
     }
 
     return (
@@ -35,7 +36,6 @@ const AddressFormCheck = (props) => {
             validationSchema={FORM_VALIDATION}
             onSubmit={values => {
                 handlerSubmite(values);
-                console.log(values);
             }}>
             <Form>
 
